@@ -33,21 +33,21 @@ pipeline {
                     artifactPath = fileMyGlob[0].path
                     artifactExists = fileExists artifactPath
                     if (artifactExists) {
-                        echo "File: ${artifactPath}, group: ${pom.groupid}, packaging: ${pom.packaging}, version: ${pom.version}"
+                        echo "File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version: ${pom.version}"
                         nexusArtifactUploader {
-                            nexusversion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusurl: NEXUS_URL,
-                            groupid: pom.groupid,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialID: NEXUS_CREDENTIAL_ID,
+                            nexusversion: "${NEXUS_VERSION}",
+                            protocol: "${NEXUS_PROTOCOL}",
+                            nexusurl: "${NEXUS_URL}",
+                            groupid: "${pom.groupId}",
+                            version: "${pom.version}",
+                            repository: "${NEXUS_REPOSITORY}",
+                            credentialID: "${NEXUS_CREDENTIAL_ID}",
                             artifacts: [
                                 [
-                                    artifactid: pom.artifactId,
+                                    artifactid: "${pom.artifactId}",
                                     classifier: '',
                                     file: artifactPath,
-                                    type: pom.packaging
+                                    type: "${pom.packaging}"
                                 ]
                             ]
                         }

@@ -8,7 +8,7 @@ environment {
     NEXUS_PROTOCOL = "http"
     NEXUS_URL = "192.168.1.128:8081"
     NEXUS_REPOSITORY = "LoginWebApp"
-    NEXUS_CREDENTIAL_ID = "	9a50a8ee-76c6-42e0-ae5d-29e55d6eb6bd"
+    NEXUS_CREDENTIAL_ID = "9a50a8ee-76c6-42e0-ae5d-29e55d6eb6bd"
     
 }
 stages{

@@ -14,7 +14,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    git "https://github.com/DivyaThoshini/LoginWebApp.git";
+                    git "https://github.com/DivyaThoshini/LoginWebApp.git"
                 }
             }
         }
@@ -28,15 +28,12 @@ pipeline {
         stage('Publish to Nexus') {
             steps {
                 script {
-                    pom = readMavenPom file: "pom.xml";
-                    fileMyGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    artifactPath = fileMyGlob[0].path;
-                    artifactExists = fileExists artifactPath;
+                    pom = readMavenPom file: "pom.xml"
+                    fileMyGlob = findFiles(glob: "target/*.${pom.packaging}")
+                    artifactPath = fileMyGlob[0].path
+                    artifactExists = fileExists artifactPath
                     if (artifactExists) {
-                        echo "File: ${artifactPath},
-                              group: ${pom.groupid},
-                              packaging: ${pom.packaging},
-                              version: ${pom.version}";
+                        echo "File: ${artifactPath}, group: ${pom.groupid}, packaging: ${pom.packaging}, version: ${pom.version}"
                         nexusArtifactUploader {
                             nexusversion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,

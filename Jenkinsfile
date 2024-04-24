@@ -8,26 +8,35 @@ environment {
     NEXUS_PROTOCOL = "http"
     NEXUS_URL = "192.168.1.128:8081"
     NEXUS_REPOSITORY = "LoginWebApp"
-    NEXUS_CREDENTIAL_ID = "9a50a8ee-76c6-42e0-ae5d-29e55d6eb6bd"
+    NEXUS_CREDENTIAL_ID = "9a50a8ee-76c6-42e0-ae5d-29e55d6eb6bd" 
     
 }
 stages{
-        stage('Build'){
+
+        stage('Git Checkout'){
             steps {
-                sh 'mvn clean package'
-            }
-            post {
-                success {
-                    echo 'Archiving the artifacts'
-                    archiveArtifacts artifacts: '**/*.war'
+                script {
+                    git "https://github.com/DivyaThoshini/LoginWebApp.git";
                 }
             }
         }
+        stage('Build'){
+            steps {
+                script {
+                  sh 'mvn clean package'
+            }
+          }
+        }
 
-        stage ('Deployments'){
-                stage ('Deploy to Staging Server'){
+        stage ('Publish to Nexus'){
+                
                     steps {
-                        sh "scp **/*.war jenkins@${params.tomcat_stag}:/usr/share/tomcat/webapps"
+                        script {
+                           pom = readMavenPom file: "pom.xml";
+                            fileMyGlob = findfiles(glob: "target/*.${pom.packaging}");
+                            artifactPath = fileMyGlob[0].path;
+                            artifactExists = fileExists artifactPath;
+                            if
                     }
                 }
             }

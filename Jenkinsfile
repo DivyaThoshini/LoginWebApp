@@ -33,13 +33,13 @@ pipeline {
                     if (artifactExists) {
                         echo "File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version: ${pom.version}"
                         nexusArtifactUploader(
-                            nexusversion: "${NEXUS_VERSION}",
+                            nexusVersion: "${NEXUS_VERSION}",
                             protocol: "${NEXUS_PROTOCOL}",
-                            nexusurl: "${NEXUS_URL}",
-                            groupid: "${pom.groupId}",
+                            nexusUrl: "${NEXUS_URL}",
+                            groupId: "${pom.groupId}",
                             version: "${pom.version}",
                             repository: "${NEXUS_REPOSITORY}",
-                            credentialID: "${NEXUS_CREDENTIAL_ID}",
+                            credentialsId: "${NEXUS_CREDENTIAL_ID}",
                             artifacts: [
                                 [
                                     artifactId: "${pom.artifactId}",
@@ -48,7 +48,8 @@ pipeline {
                                     type: "${pom.packaging}"
                                 ]
                             ]
-                        )
+                    )
+
                     } else {
                         echo "Error: Artifact not found"
                     }
